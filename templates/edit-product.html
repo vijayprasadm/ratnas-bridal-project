@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - Ratnas Bridal Collections</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="[https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap)" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo-area">
+                    <a href="{{ url_for('home') }}" class="logo">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Ratnas Bridal Collections Logo">
+                    </a>
+                    <div class="shop-name-container">
+                        <h1 class="shop-name-primary">Ratnas Bridal</h1>
+                        <p class="shop-name-secondary">Collections</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('home') }}#about">About</a></li>
+                        <li><a href="{{ url_for('home') }}#collections">Collections</a></li>
+                        <li><a href="{{ url_for('home') }}#contact">Contact Us</a></li>
+                        <li><a href="{{ url_for('logout') }}" id="logout-btn">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-content">
+        <div class="container">
+            <div class="form-container">
+                <h2>Edit Product: {{ product.name }}</h2>
+                <form id="edit-form" enctype="multipart/form-data">
+                    <input type="hidden" id="product-id" name="id" value="{{ product._id }}">
+                    
+                    <label for="product-category">Category</label>
+                    <select id="product-category" name="category" required>
+                        <!-- Dynamically populate the categories based on the list passed from the server -->
+                        {% for category_name in categories %}
+                            <option value="{{ category_name }}" {% if product.category == category_name %}selected{% endif %}>{{ category_name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" name="name" value="{{ product.name }}" required>
+
+                    <!-- Removed Description and Price fields as per your request -->
+
+                    <label>Current Image</label>
+                    <img id="product-image-preview" src="{{ product.image }}" alt="{{ product.name }}" style="width: 150px; height: 150px; object-fit: cover; margin-bottom: 15px; border-radius: 5px;">
+
+                    <label for="product-image">Upload New Image (optional)</label>
+                    <input type="file" id="product-image" name="image" accept="image/*">
+                    
+                    <button type="submit" class="btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ratnas Bridal Collections. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('edit-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const productId = document.getElementById('product-id').value;
+            const formData = new FormData(this);
+            
+            const response = await fetch(`/edit/${productId}`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                // Replaced alert() with a modal for better user experience
+                showMessage('Product updated successfully!', 'success');
+                window.location.href = '/dashboard';
+            } else {
+                showMessage('Failed to save changes: ' + data.message, 'error');
+            }
+        });
+
+        // Replaced alert() with a custom message display function
+        function showMessage(message, type) {
+            // In a real application, you would create a modal or a toast notification here.
+            // For this example, we'll use a simple alert for quick feedback.
+            // Please replace this with a more sophisticated UI element.
+            alert(message);
+        }
+    </script>
+</body>
+</html>

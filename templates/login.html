@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Ratnas Bridal Collections</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo-area">
+                    <a href="index.html" class="logo">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Ratnas Bridal Collections Logo">
+                    </a>
+                    <div class="shop-name-container">
+                        <h1 class="shop-name-primary">Ratnas Bridal</h1>
+                        <p class="shop-name-secondary">Collections</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#collections">Collections</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="login.html">Admin Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-content">
+        <div class="container">
+            <div class="form-container">
+                <h2>Admin Login</h2>
+                <form id="login-form">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                    
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    
+                    <button type="submit" class="btn">Login</button>
+                    <p id="error-message" style="color: #FF0000; margin-top: 10px;"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ratnas Bridal Collections. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            window.location.href = data.redirect_url;
+        } else {
+            errorMessage.textContent = data.message;
+        }
+    });
+</script>
+</body>
+</html>

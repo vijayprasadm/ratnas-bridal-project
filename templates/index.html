@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratnas Bridal Collections</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="[https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap)" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo-area">
+                    <a href="#home" class="logo">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Ratnas Bridal Collections Logo">
+                    </a>
+                    <div class="shop-name-container">
+                        <h1 class="shop-name-primary">Ratnas Bridal</h1>
+                        <p class="shop-name-secondary">Collections</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="{{ url_for('login') }}">Admin Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Timeless Elegance in Every Gem</h1>
+            <p>Adorn your moments with our exclusive designer jewellery collections.</p>
+            <a href="#collections" class="btn">Explore Collections</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Rathnas Bridal Collections</h2>
+            <p>Nestled amidst Tiruchirappalli's vibrant streets, RATNAS Bridal Collections has become an exquisite haven for brides-to-be seeking ethereal beauty and timeless elegance. Established in November 2022, our curated selection of enchanting wedding jewellery sets offers a delicate balance of tradition and modernity.</p><br/>
+            <p>We also pride ourselves on our versatile range of services, including designers sarees for rent in Trichy, AD Jewellery for rent, and complete bridal collections for rent. Each piece is meticulously crafted, ensuring that every bride looks and feels radiant on her special day.</p><br/>
+            <p>Whether you're searching for the best price for bridal jewellery in Trichy, a bridal jewellery shop near me, or best fashion jewellery in Trichy, RATNAS is your premier destination. Our commitment to quality, intricate design, and a personalized experience shines through in every adornment. We also provide bridal jewellery sets wholesale in Trichy to meet all your needs. We invite you to discover the magic that awaits you on your special day.</p>
+        </div>
+    </section>
+
+    <section id="collections" class="collections-section">
+        <div class="container">
+            <h2>Our Designer Jewellery Collections</h2>
+            <div class="product-grid">
+                {% for collection in collections %}
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename=collection.image) }}" alt="{{ collection.name }}">
+                    <h3>{{ collection.name }}</h3>
+                    <a href="{{ url_for('category', category_url_name=collection.url_name) }}" class="btn">View Collection</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2>Customer Feedback</h2>
+            <div class="testimonials-stacked-container">
+                <div class="testimonials-cards">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I came to this shop for my sister's wedding. The designs were awesome, and they have many new model design collections. I would recommend it to bride or bridesmaids who are searching for bridal jewellery for their big day."</p>
+                        <p class="testimonial-author">- by Padma Priya</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"They have an amazing collection of unique and trendy designs. Perfect place for brides and bridesmaids looking for elegant jewellery for their special day!"</p>
+                        <p class="testimonial-author">- by Sakthi R</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Trending new collections and largest collection recently visit the shop for my marriage good quality awesome collection ✨good customer support ✨"</p>
+                        <p class="testimonial-author">- by Manjula Devi.B</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Ratnas bridal jewellery collection is very good Shop My sister marriage visit to ratnas bridal collection very good collection New jewellery collection service very good I am full satisfied thanks to ratnas bridal collection 🥰"</p>
+                        <p class="testimonial-author">- by Kalaingar R</p>
+                    </div>
+                </div>
+                <button id="nextCardBtn" class="stacked-btn">Next Testimonial</button>
+            </div>
+        </div>
+    </section>
+
+<section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            
+            <div class="contact-info" style="text-align: center;">
+                <p><strong>Address:</strong> Classic Towers, Bus Stop, 5,<br>1st Floor, 10th Cross St,<br>Thillai Nagar, Tiruchirappalli,<br>Tamil Nadu 620018</p>
+            </div>
+
+            <!-- New section for contact icons -->
+            <div class="contact-icons">
+                <!-- Phone Icon Link -->
+                <a href="tel:+918778652530" class="icon-link" aria-label="Phone">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.76-.24 1.02l-2.2 2.2z"/>
+                    </svg>
+                </a>
+                
+                <!-- Mail Icon Link -->
+                <a href="mailto:info@yourwebsite.com" class="icon-link" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                
+                <!-- Instagram Icon Link -->
+                <a href="https://www.instagram.com/ratnasbridalcollections/?hl=en" target="_blank" class="icon-link" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2c2.716 0 3.056.012 4.12.062 1.063.049 1.794.218 2.427.466.607.241 1.115.584 1.624 1.092.508.508.852 1.016 1.092 1.624.248.633.417 1.364.466 2.427.05 1.064.062 1.404.062 4.12s-.012 3.056-.062 4.12c-.049 1.063-.218 1.794-.466 2.427-.241.607-.584 1.115-1.092 1.624-.508.508-1.016.852-1.624 1.092-.633.248-1.364.417-2.427.466-1.064.05-1.404.062-4.12.062s-3.056-.012-4.12-.062c-1.063-.049-1.794-.218-2.427-.466-.607-.241-1.115-.584-1.624-1.092-.508-.508-.852-1.016-1.092-1.624-.248-.633-.417-1.364-.466-2.427-.05-1.064-.062-1.404-.062-4.12s.012-3.056.062-4.12c.049-1.063.218-1.794.466-2.427.241-.607.584-1.115 1.092-1.624.508-.508 1.016-.852 1.624-1.092.633-.248 1.364-.417 2.427-.466C8.944 2.012 9.284 2 12 2zm0 2.16c-2.71 0-3.046.012-4.11.062-1.056.049-1.687.21-2.285.454-.572.23-.974.526-1.385.937-.41.411-.707.813-.937 1.385-.244.598-.405 1.229-.454 2.285-.05 1.064-.062 1.404-.062 4.11s.012 3.046.062 4.11c.049 1.056.21 1.687.454 2.285.23.572.526.974.937 1.385.411.41.813.707 1.385.937.598.244 1.229.405 2.285.454 1.064.05 1.404.062 4.11.062s3.046-.012 4.11-.062c1.056-.049 1.687-.21 2.285-.454.572-.23.974-.526 1.385-.937.41-.411.707-.813.937-1.385.244-.598.405-1.229.454-2.285.05-1.064.062-1.404.062-4.11s-.012-3.046-.062-4.11c-.049-1.056-.21-1.687-.454-2.285-.23-.572-.526-.974-.937-1.385-.411-.41-.813-.707-1.385-.937-.598-.244-1.229-.405-2.285-.454C15.046 4.172 14.704 4.16 12 4.16zm0 2.296c-2.457 0-4.45 1.993-4.45 4.45s1.993 4.45 4.45 4.45 4.45-1.993 4.45-4.45-1.993-4.45-4.45-4.45zm0 2.16c1.265 0 2.29 1.025 2.29 2.29s-1.025 2.29-2.29 2.29-2.29-1.025-2.29-2.29 1.025-2.29 2.29-2.29zm6.052-3.23c.532 0 .963.43.963.963s-.43.963-.963.963-.963-.43-.963-.963.43-.963.963-.963z"/>
+                    </svg>
+                </a>
+                
+                <!-- YouTube Icon Link -->
+                <a href="https://youtube.com/@ratnasbridalcollectionstanjore?si=ywGNhIybI5NmO6P-" target="_blank" class="icon-link" aria-label="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.54 6.49c-.21-1.12-.9-2.09-1.93-2.31-1.3-.29-3.41-.33-6.61-.33-3.2 0-5.31.04-6.61.33-1.03.22-1.72 1.19-1.93 2.31-.29 1.3-.33 3.41-.33 6.61s.04 5.31.33 6.61c.21 1.12.9 2.09 1.93 2.31 1.3.29 3.41.33 6.61.33s5.31-.04 6.61-.33c1.03-.22 1.72-1.19 1.93-2.31.29-1.3.33-3.41.33-6.61s-.04-5.31-.33-6.61zM9.54 16.5v-9l7 4.5-7 4.5z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <p>Join our WhatsApp group to get our latest updates and connect with us instantly!</p>
+            
+            <div style="text-align: center;">
+                <a href="https://chat.whatsapp.com/GGy82gQupztBCjDkiL0ocW?mode=ac_t" class="btn">Join Our WhatsApp Group</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ratnas Bridal Collections. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

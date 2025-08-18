@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - Ratnas Bridal Collections</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo-area">
+                    <a href="{{ url_for('home') }}" class="logo">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Ratnas Bridal Collections Logo">
+                    </a>
+                    <div class="shop-name-container">
+                        <h1 class="shop-name-primary">Ratnas Bridal</h1>
+                        <p class="shop-name-secondary">Collections</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('home') }}#about">About</a></li>
+                        <li><a href="{{ url_for('home') }}#collections">Collections</a></li>
+                        <li><a href="{{ url_for('home') }}#contact">Contact Us</a></li>
+                        <li><a href="{{ url_for('login') }}">Admin Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-content">
+        <div class="container">
+            <h2>{{ title }}</h2>
+            <div class="product-grid">
+                {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p class="price">₹{{ product.price }}</p>
+                </div>
+                {% endfor %}
+                {% if not products %}
+                    <p class="no-products-message">No products in this category yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ratnas Bridal Collections. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

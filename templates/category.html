@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_name.capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--
+    MODIFICATION: Replaced the old header with the full, branded header from index.html.
+    This ensures the logo, shop name, and layout are consistent.
+    -->
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo-area">
+                    <a href="{{ url_for('home') }}" class="logo">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Ratnas Bridal Collections Logo">
+                    </a>
+                    <div class="shop-name-container">
+                        <h1 class="shop-name-primary">Ratnas Bridal</h1>
+                        <p class="shop-name-secondary">Collections</p>
+                    </div>
+                </div>
+                <!--
+                MODIFICATION: Simplified the navigation to only show the "Home" tab.
+                -->
+                <nav class="nav">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!--
+    MODIFICATION: Added a main-content wrapper to apply the correct padding from style.css
+    to account for the fixed header, ensuring content is not hidden behind it.
+    -->
+    <section class="main-content">
+        <div class="container">
+            <div class="category-section">
+                <h2>{{ category_name.capitalize() }}</h2>
+                <div class="product-grid">
+                    {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+                        <h3>{{ product.name }}</h3>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Display a message if no products are found for the category -->
+                {% if not products %}
+                    <p class="no-products-message">No products found for this category.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!--
+    MODIFICATION: Replaced the old footer with the full footer from index.html.
+    This ensures the copyright information and styling are consistent.
+    -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ratnas Bridal Collections. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,3 +1,2 @@
 Flask
 gunicorn
-```gunicorn` is a web server that's required for running Flask applications in a production environment like Render.
